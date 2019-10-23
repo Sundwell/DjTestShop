@@ -1,0 +1,21 @@
+td, th {
+        border: 1px solid black;
+        padding: 5px;
+        text-align: center;
+
+    }
+    table {
+        border: 1px solid black;
+        border-spacing: 0;
+        font-size: inherit;
+        margin: 0 auto;
+        background-color: white;
+    }
+
+    .pr_list {
+        margin: 0 auto;
+        border: 1px solid black;
+        text-align: center;
+        background-color: bisque;
+        padding-bottom: 200px;
+    }

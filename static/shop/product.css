@@ -1,0 +1,17 @@
+body {
+        background-color: bisque;
+        font-size: 3em;
+    }
+    dt {
+        border-left: 3px solid black;
+        border-bottom: 3px solid black;
+        border-radius: 5px;
+        width: fit-content;
+    }
+    dd p {
+        border-bottom: 1px solid black;
+    }
+    dt:hover, dt p:hover {
+        color: darkred;
+        border-color: red;
+    }
