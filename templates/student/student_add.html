@@ -3,13 +3,16 @@
 {% block content %}
     <div class="content-section">
             <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
+  {% csrf_token %}
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Login page</legend>
+                    <legend class="border-bottom mb-4">New student page</legend>
                     {{ form|crispy }}
                 </fieldset>
                 <div class="form-group">
-                    <button class="btn btn-outline-info" type="submit">Confirm</button>
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-danger" type="submit"><a class="text-white" href="{% url 'student:students' %}">Cancel</a></button>
                 </div>
             </form>
         </div>

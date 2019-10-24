@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block content %}
-    <link rel="stylesheet" href="/static/shop/product_list.css" type="text/css">
-<div class="container pr_list">
+<div class="content-section">
 <h1>Products list:</h1>
 <table>
     <tr>
@@ -22,6 +20,7 @@
     {% endfor %}
 </table>
     <form action="{% url 'shop:add_product' %}">
+                {% csrf_token %}
         <input type="submit" value="Add product">
     </form>
 </div>

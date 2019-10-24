@@ -9,10 +9,6 @@ class ProductPageView(ListView):
     model = Product
     template_name = 'shop/pr_list.html'
 
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs
-
 
 class AddProductView(FormView):
     model = Product

@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'django_extensions',
     'crispy_forms',
+    'student.apps.StudentConfig'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

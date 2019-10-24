@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-section">
+       <dl>
+           <dt class="border-bottom border-top display-4 text-center">Student №{{ student.id }}</dt>
+           <dd class="lead">
+               <p class="">First Name: {{ student.first_name }}</p>
+               <p class="">Last Name: {{ student.last_name }}</p>
+               <p>Year: {{ student.year }}</p>
+           </dd>
+       </dl>
+        <form method="post" action="{% url 'student:student_delete' student.id %}">
+        {% csrf_token %}
+            <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Delete this student</button>
+                </div>
+    </form>
+    <form method="post" action="{% url 'student:student_update' student.id %}">
+        {% csrf_token %}
+        <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update info</button>
+            </div>
+    </form>
+    </div>
+
+{% endblock %}
