@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="content-section">
+        <legend class="border-bottom mb-4 text-center">{{ sportsman.name }}'s Profile</legend>
+        <img class="border mb-2" src="{{ sportsman.photo.url }}" alt="" width=50em>
+    <p>Age: {{ sportsman.age }}</p>
+    <p>Kind of sport: {{ sportsman.kind }}</p>
+    <div>
+        <legend class="border-bottom mb-4 text-center">{{ sportsman.gym_name }} Gym</legend>
+        <p>Cost: {{ sportsman.cost }}</p>
+        <p>Size: {{ sportsman.size }}</p>
+    </div>
+    <button class="btn btn-outline-info" type="button">
+        <a href="{% url 'sport:sp_fields_list' sportsman.id %}">Show fields</a>
+    </button>
+    </div>
+
+{% endblock %}

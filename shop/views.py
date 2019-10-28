@@ -1,6 +1,8 @@
-from django.views.generic import ListView, DeleteView, FormView
+from django.views import View
+from django.views.generic import ListView, DeleteView, FormView, DetailView, TemplateView
 from django.urls import reverse_lazy
 from shop.models import Product
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import ProductAddForm
 
@@ -10,7 +12,8 @@ class ProductPageView(ListView):
     template_name = 'shop/pr_list.html'
 
 
-class AddProductView(FormView):
+class AddProductView(LoginRequiredMixin, FormView):
+    login_url = reverse_lazy('user:login')
     model = Product
     form_class = ProductAddForm
     template_name = 'shop/pr_add.html'
@@ -23,7 +26,12 @@ class AddProductView(FormView):
         return super().form_valid(form)
 
 
-class ShowDeleteView(DeleteView):
+class ShowDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('user:login')
     model = Product
     template_name = 'shop/product.html'
     success_url = reverse_lazy('shop:products')
+
+
+class MainPageView(TemplateView):
+    template_name = 'base.html'

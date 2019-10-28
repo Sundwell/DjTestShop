@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-section">
+     <legend class="border-bottom mb-4 text-center">Sportsmen</legend>
+    <table class="border mb-2">
+            <tr>
+                <th class="border mb-2 p-2">Photo</th>
+                <th class="border mb-2 p-2">Name</th>
+                <th class="border mb-2 p-2">Age</th>
+                <th class="border mb-2 p-2">Kind of sport</th>
+                <th class="border mb-2 p-2">Gym name</th>
+            </tr>
+            {% for sportsman in sportsman_list %}
+                <tr>
+                    <td class="border mb-2 p-2"><img src="{{ sportsman.photo.url }}" alt="" width=50em></td>
+                    <td class="border mb-2 p-2"><a href="{% url 'sport:sp_profile' sportsman.id %}">{{ sportsman.name }}</a></td>
+                    <td class="border mb-2 p-2">{{ sportsman.age }}</td>
+                    <td class="border mb-2 p-2">{{ sportsman.kind }}</td>
+                    <td class="border mb-2 p-2">{{ sportsman.gym_name }}</td>
+                </tr>
+                {% empty %}
+                <li>No sportsmen.</li>
+                <button class="btn btn-outline-info"><a href="{% url 'sport:sp_add' %}">New one</a></button>
+            {% endfor %}
+
+        </table>
+    </div>
+{% endblock %}

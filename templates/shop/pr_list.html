@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="content-section">
-<h1>Products list:</h1>
-<table>
-    <tr>
-        <th>Photo</th>
-        <th>Name</th>
-        <th>Add Date</th>
-        <th>Date of expire</th>
-    </tr>
-    {% for product in object_list %}
-        <tr>
-        <td><img src="{{ product.product_photo.url }}" alt="" width=100em></td>
-        <td><a href="{% url 'shop:product' product.id %}">{{ product.product_name }}</a></td>
-        <td>{{ product.add_date }}</td>
-        <td>{{ product.date_of_expire }}</td>
-        </tr>
-    {% endfor %}
-</table>
-    <form action="{% url 'shop:add_product' %}">
-                {% csrf_token %}
-        <input type="submit" value="Add product">
-    </form>
-</div>
+    <div class="content-section">
+        <h1>Products list:</h1>
+        <table>
+            <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Add Date</th>
+                <th>Date of expire</th>
+            </tr>
+            {% for product in object_list %}
+                <tr>
+                    <td><img src="{{ product.product_photo.url }}" alt="" width=100em></td>
+                    <td><a href="{% url 'shop:product' product.id %}">{{ product.product_name }}</a></td>
+                    <td>{{ product.add_date }}</td>
+                    <td>{{ product.date_of_expire }}</td>
+                </tr>
+                {% empty %}
+                <li>No products here</li>
+            {% endfor %}
+
+        </table>
+        <form action="{% url 'shop:add_product' %}">
+            {% csrf_token %}
+            <input type="submit" value="Add product">
+        </form>
+    </div>
 {% endblock %}

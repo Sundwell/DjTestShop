@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-section">
+        {% for field in myfields_list %}
+                <p><a href="{% url 'sport:sp_field' field.id %}">{{ field.field_name }}</a></p>
+        {% empty %}
+            <legend class="border-bottom mb-4 text-center">This sportsman has no fields</legend>
+        {% endfor %}
+    </div>
+
+{% endblock %}

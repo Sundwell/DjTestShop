@@ -15,7 +15,6 @@ class User(AbstractUser):
 
     def has_permission(self):
         return self.is_superuser
-
     class Meta:
         unique_together = ['email', 'username']
 
