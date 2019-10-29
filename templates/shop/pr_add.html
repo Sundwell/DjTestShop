@@ -9,7 +9,8 @@
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Confirm</button>
+                <button class="btn btn-success btn-inline" type="submit">Confirm</button>
+                <a href="{% url 'shop:products' %}" class="btn btn-danger btn-inline" role="button">Cancel</a>
             </div>
         </form>
     </div>

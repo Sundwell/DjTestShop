@@ -2,27 +2,54 @@
 {% load static %}
 {% block content %}
     <div class="content-section">
-        {#here question (objects)#}
-        <dl>
-            <dt><img src="{{ product.product_photo.url }}" alt="" width="100em">{{ product.product_name }}</dt>
-            <dd>
-                <p>Add date: {{ product.add_date }}</p>
-                <p>Date of expire: {{ product.date_of_expire }}</p>
-                <p>Expired: {{ product.expired }}</p>
-                <p>Description: {{ product.description }}</p>
-                {% if object.user.is_superuser %}
-                    <p>Who added: {{ product.user }}</p>
-                {% endif %}
-                <form method="post" action="{% url 'shop:product' product.id %}">
-                    {% csrf_token %}
+        <div class="row">
+            <div class="col-2 text-center border-right">
+                <h2>
+                    {{ product.product_name }}
+                </h2>
+                <img src="{{ product.product_photo.url }}" alt="" class="w-75">
+            </div>
+            <div class="col-4 border-right">
+                <h4>Add date: {{ product.add_date }}</h4>
+                <h4>
+                    {% if product.expired %}
+                    Product is expired.
+                    {% else %}
+                    Product is fresh.
+                    {% endif %}
+                </h4>
+                {% if user.is_superuser %}
+                    <blockquote class="blockquote-footer">added {{ product.user }}</blockquote>
+                    <form method="post" action="{% url 'shop:product' product.id %}">{% csrf_token %}
                     {% if user.has_permission %}
-                        <button class="btn btn-outline-info" type="submit">Delete {{ product.product_name }}</button>
+                        <button class="btn btn-danger btn-sm float-right" type="submit">Delete {{ product.product_name }}</button>
                     {% endif %}
                 </form>
-            </dd>
-        </dl>
+                {% endif %}
+            </div>
+            <div class="col-6">
+                <h3>Description:</h3>
+                <p>{{ product.description }}</p>
+            </div>
+        </div>
 
-
+{#        <dl>#}
+{#            <dt><img src="{{ product.product_photo.url }}" alt="" width="100em">{{ product.product_name }}</dt>#}
+{#            <dd>#}
+{#                <p>Add date: {{ product.add_date }}</p>#}
+{#                <p>Date of expire: {{ product.date_of_expire }}</p>#}
+{#                <p>Expired: {{ product.expired }}</p>#}
+{#                <p>Description: {{ product.description }}</p>#}
+{#                {% if object.user.is_superuser %}#}
+{#                    <p>Who added: {{ product.user }}</p>#}
+{#                {% endif %}#}
+{#                <form method="post" action="{% url 'shop:product' product.id %}">#}
+{#                    {% csrf_token %}#}
+{#                    {% if user.has_permission %}#}
+{#                        <button class="btn btn-outline-info" type="submit">Delete {{ product.product_name }}</button>#}
+{#                    {% endif %}#}
+{#                </form>#}
+{#            </dd>#}
+{#        </dl>#}
     </div>
-
 {% endblock %}
