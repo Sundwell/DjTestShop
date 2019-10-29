@@ -2,11 +2,48 @@
 
 {% block content %}
     <div class="content-section">
-        {% for field in myfields_list %}
-                <p><a href="{% url 'sport:sp_field' field.id %}">{{ field.field_name }}</a></p>
-        {% empty %}
-            <legend class="border-bottom mb-4 text-center">This sportsman has no fields</legend>
-        {% endfor %}
+        <h1 class="border border-dark mb-4 text-center text-white bg-steel rounded">Fields list</h1>
+        <div class="row">
+            {% for field in myfields_list %}
+                <div class="col-sm-12 col-md-3 border mb-4 text-center bg-steel rounded content-justify-center" id="field-{{ field.id }}">
+                    <h3 class="text-white">
+                        {{ field.field_name }}
+                    </h3>
+                    <a class="btn btn-md btn-block badge-info mb-2 rounded border border-dark" role="button" href="{% url 'sport:sp_field' field.id %}">Details</a>
+                    {#                    <form action="{% url 'sport:sp_field_delete' field.id %}" method="post">{% csrf_token %}#}
+                    {#                        <button class="btn btn-danger btn-block btn-md mb-2 rounded" type="submit">Remove</button>#}
+                    {#                    </form>#}
+{#                    <form action="">{% csrf_token %}#}
+                        <button class="btn-danger form-control mb-2" onClick="deleteField({{ field.id }})">Remove</button>
+{#                    </form>#}
+                </div>
+            {% empty %}
+                <legend class="border-bottom mb-4 text-center">This sportsman has no fields</legend>
+            {% endfor %}
+        </div>
     </div>
 
+{% endblock %}
+{% block extrajs %}
+    <script>
+
+            function deleteField(id) {
+                var action = confirm("Are you sure you want to delete this field?");
+                if (action != false) {
+                    $.ajax({
+                        url: '{% url "sport:field_ajax_delete" %}',
+                        data: {
+                            'id': id,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.deleted) {
+                                $("#field-" + id).remove();
+                            }
+                        }
+                    });
+             }
+        }
+
+    </script>
 {% endblock %}

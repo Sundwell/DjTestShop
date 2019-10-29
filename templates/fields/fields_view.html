@@ -2,17 +2,34 @@
 
 {% block content %}
     <div class="content-section">
-        <legend class="border-bottom mb-4 text-center">{{ myfields.field_name }}</legend>
-        <p class="border-bottom mb-2">Is superfield: {{ myfields.is_superfield }}</p>
-        <p class="border-bottom mb-2">Date now: {{ myfields.date_now }}</p>
-        <p class="border-bottom mb-2">Datetime: {{ myfields.datetime }}</p>
-        <p class="border-bottom mb-2">Field price: {{ myfields.field_price }}</p>
-        <p class="border-bottom mb-2">Email: {{ myfields.email }}</p>
-        <p class="border-bottom mb-2">Year: {{ myfields.field_year }}</p>
-        <p class="border-bottom mb-2">Description: {{ myfields.field_description }}</p>
-        <p class="border-bottom mb-2">Field time: {{ myfields.field_time }}</p>
-        <form method="post">{% csrf_token %}
-                <button class="btn btn-outline-info" type="submit">Delete {{ myfields.field_name }}</button>
-        </form>
+        <h1 class="border border-dark mb-4 text-center text-white bg-steel rounded">Field: {{ myfields.field_name }}</h1>
+        <div class="row">
+            <div class="col-2 text-center border-right">
+                <h2 class="border-bottom text-center">Dates and time</h2>
+                <p class="border-bottom mb-2">Date now: {{ myfields.date_now }}</p>
+                <p class="border-bottom mb-2">Datetime: {{ myfields.datetime }}</p>
+                <p class="border-bottom mb-2">Year: {{ myfields.field_year }}</p>
+                <p class="border-bottom mb-2">Field time: {{ myfields.field_time }}</p>
+            </div>
+
+            <div class="col-4 border-right">
+                <h2 class="border-bottom">Main details</h2>
+                {% if myfields.is_superfield %}
+                    <p class="border-bottom mb-2 lead">This field is superfield!</p>
+                {% else %}
+                    <p class="border-bottom mb-2 lead">This field is common.</p>
+                {% endif %}
+                <p class="border-bottom mb-2 lead">Field price: {{ myfields.field_price }}</p>
+                <p class="border-bottom mb-2 lead">Email: {{ myfields.email }}</p>
+                <form method="post" action="{% url 'sport:sp_field_delete' myfields.id %}">{% csrf_token %}
+                    <button class="btn btn-danger float-right" type="submit">Delete {{ myfields.field_name }}</button>
+                </form>
+            </div>
+
+            <div class="col-6 border-right">
+                <h3>Description: </h3>
+                <p class="lead">{{ myfields.field_description }}</p>
+            </div>
+        </div>
     </div>
 {% endblock %}

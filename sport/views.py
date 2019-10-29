@@ -1,6 +1,7 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, View
 
 from fields.models import MyFields
 from .models import Sportsman
@@ -33,8 +34,24 @@ class ShowSpFieldsView(ListView):
         return context
 
 
-class ShowFieldView(DeleteView):
+class ShowFieldView(DetailView):
     model = MyFields
     template_name = 'fields/fields_view.html'
+
+
+class DeleteFieldView(DeleteView):
+    model = MyFields
+    template_name = 'sport/delete_field.html'
     success_url = reverse_lazy('sport:sp_list')
 
+
+class DeleteField(View):
+
+    def get(self, request):
+        print(request.GET)
+        id1 = request.GET.get('id', None)
+        MyFields.objects.get(id=id1).delete()
+        data = {
+            'deleted': True
+        }
+        return JsonResponse(data)
