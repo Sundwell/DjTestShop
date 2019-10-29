@@ -26,14 +26,10 @@ class ShowSpFieldsView(ListView):
     model = MyFields
     template_name = 'sport/sp_fields.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        self.sportsman = get_object_or_404(Sportsman, pk=kwargs['pk'])
-        return super().dispatch(request, *args, **kwargs)
-
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ShowSpFieldsView, self).get_context_data(**kwargs)
-        context['sp_id'] = self.kwargs['pk']
-        context['myfields_list'] = MyFields.objects.filter(sportsman_id=self.kwargs['pk'])
+        context.update({'sp_id': self.kwargs['pk']})
+        context.update({'myfields_list': MyFields.objects.filter(sportsman_id=self.kwargs['pk'])})
         return context
 
 
