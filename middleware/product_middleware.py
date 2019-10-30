@@ -5,6 +5,8 @@ from shop.models import Product
 class AlwaysFreshMiddleware(MiddlewareMixin):
 
     def __call__(self, request):
+
+        response = self.get_response(request)
         Product.objects.update(expired=False)
 
-        return super(AlwaysFreshMiddleware, self).__call__()
+        return response
