@@ -17,7 +17,7 @@ class CheckExpired(MiddlewareMixin):
 
         pr_last = Product.objects.last()
         if pr_last:
-            if pr_last.add_date >= Product.objects.last().date_of_expire:
+            if pr_last.add_date >= pr_last.date_of_expire:
                 pr_last.delete()
                 raise ProductError(f"You can't add an expired product.")
 
